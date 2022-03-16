@@ -1,0 +1,4 @@
+hamster
+pumpkin
+dog
+jaguar
