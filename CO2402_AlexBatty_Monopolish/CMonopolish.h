@@ -8,6 +8,11 @@ class CPlayer;
 class CDie;
 class CSquare;
 
+struct SRequired
+{
+
+};
+
 class CMonopolish
 {
 public:

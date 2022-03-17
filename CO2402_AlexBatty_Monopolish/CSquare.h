@@ -28,8 +28,13 @@ public:
 
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player);
 
-protected:
+	int GetIndex();
+
 	string mName = "Invalid";
+
+protected:
+	/* The index of the vector to get this square */
+	int mIndex = -1;
 
 	ESquareType mType = ESquareType::Invalid;
 

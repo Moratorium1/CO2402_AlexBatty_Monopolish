@@ -36,6 +36,12 @@
     <ClCompile Include="CProperty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="COwnable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMonopolish.h">
@@ -54,6 +60,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CProperty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="COwnable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

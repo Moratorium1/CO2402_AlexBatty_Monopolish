@@ -1,16 +1,12 @@
 #pragma once
-#include "CSquare.h"
-#include "CPlayer.h"
+#include "COwnable.h"
 
-class CProperty :	public CSquare
+class CProperty :	public COwnable
 {
 public:
 	CProperty(istream& file);
 
 	friend istream& operator >> (istream& inputStream, CProperty& property);
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player) override;
-
-protected:
-	int mRent = -1;
 };
 

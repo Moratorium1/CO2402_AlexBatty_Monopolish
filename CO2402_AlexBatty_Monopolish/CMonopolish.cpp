@@ -32,6 +32,7 @@ void CMonopolish::SetupSquares()
 	{
 		while (file)
 		{
+
 			int type = 0;
 			file >> type;
 
@@ -56,22 +57,23 @@ CMonopolish::CMonopolish()
 
 void CMonopolish::PlayRound()
 {
-	//int valueRolled;
-/*
-	for (int i = 0; i < playerList.size(); i++)
+	for (int i = 0; i < playerVector.size(); i++)
 	{
-		// Get a value via a dice roll
-		valueRolled = mpDie->RollValue();
+		// Pass the player what they require to take their turn - Die, PlayerVector, SquareVector
+		
 
-		// Add the valueRolled to the players mSquareList index 
-		playerList[i]->MovePlayer(valueRolled);
 
-		// With the square stored in the linked list at the index stored by the player call landed on passing the player by reference
-		//mpSquareList->GetSquareOfIndex(playerList[i]->mSquareIndex)->LandedOn(playerList[i]);
-
-		playerList[i] = squareVector[playerList[i]->mSquareIndex]->LandedOn(move(playerList[i]));
 	}
-*/
 }
 
 
+// Get a value via a dice roll
+//valueRolled = mpDie->RollValue();
+//
+//// Add the valueRolled to the players mSquareList index 
+//playerList[i]->MovePlayer(valueRolled);
+//
+//// With the square stored in the linked list at the index stored by the player call landed on passing the player by reference
+////mpSquareList->GetSquareOfIndex(playerList[i]->mSquareIndex)->LandedOn(playerList[i]);
+//
+//playerList[i] = squareVector[playerList[i]->mSquareIndex]->LandedOn(move(playerList[i]));
