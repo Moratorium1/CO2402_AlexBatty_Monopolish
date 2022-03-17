@@ -7,6 +7,7 @@
 #include "CMonopolish.h"
 #include "CPlayer.h"
 #include "CSquare.h"
+#include "CDie.h"
 
 using namespace std;
 

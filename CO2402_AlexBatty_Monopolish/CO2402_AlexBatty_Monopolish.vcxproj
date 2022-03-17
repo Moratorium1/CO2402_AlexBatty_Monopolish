@@ -139,21 +139,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CBonus.cpp" />
     <ClCompile Include="CDie.cpp" />
     <ClCompile Include="CEvent.cpp" />
+    <ClCompile Include="CGo.cpp" />
     <ClCompile Include="CMonopolish.cpp" />
     <ClCompile Include="CO2402_AlexBatty_Monopolish.cpp" />
     <ClCompile Include="COwnable.cpp" />
+    <ClCompile Include="CPenalty.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CProperty.cpp" />
     <ClCompile Include="CSquare.cpp" />
     <ClCompile Include="SquareFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CBonus.h" />
     <ClInclude Include="CDie.h" />
     <ClInclude Include="CEvent.h" />
+    <ClInclude Include="CGo.h" />
     <ClInclude Include="CMonopolish.h" />
     <ClInclude Include="COwnable.h" />
+    <ClInclude Include="CPenalty.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CProperty.h" />
     <ClInclude Include="CSquare.h" />

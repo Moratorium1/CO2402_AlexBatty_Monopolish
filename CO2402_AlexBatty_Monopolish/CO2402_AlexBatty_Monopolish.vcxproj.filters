@@ -42,6 +42,15 @@
     <ClCompile Include="COwnable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CGo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CBonus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPenalty.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMonopolish.h">
@@ -66,6 +75,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="COwnable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CGo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CBonus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPenalty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

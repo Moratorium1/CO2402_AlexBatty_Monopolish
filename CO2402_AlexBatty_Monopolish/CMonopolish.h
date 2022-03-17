@@ -30,7 +30,7 @@ private:
 	void SetPlayers();
 
 	//
-	//unique_ptr<CDie> mpDie = make_unique<CDie>();
+	unique_ptr<CDie> mpDie = make_unique<CDie>();
 
 	vector<unique_ptr<CSquare>> squareVector;
 	void SetupSquares();

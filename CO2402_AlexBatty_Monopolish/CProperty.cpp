@@ -12,7 +12,6 @@ istream& operator>>(istream& inputStream, CProperty& property)
     return inputStream;
 }
 
-
 unique_ptr<CPlayer> CProperty::LandedOn(unique_ptr<CPlayer> player)
 {
     player = CSquare::LandedOn(move(player));
