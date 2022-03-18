@@ -1,6 +1,7 @@
 #pragma once
-#include <memory>
 #include <iostream>
+#include <memory>
+#include <vector>
 
 using namespace std;
 
@@ -32,7 +33,7 @@ public:
 
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player);
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank);
-	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die);
+	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die, vector<unique_ptr<CPlayer>>& playerList);
 
 	int GetIndex();
 	void SetIndex(const int index);

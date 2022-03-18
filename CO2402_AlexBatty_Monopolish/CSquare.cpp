@@ -27,7 +27,7 @@ unique_ptr<CPlayer> CSquare::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBa
 	return player;
 }
 
-unique_ptr<CPlayer> CSquare::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die)
+unique_ptr<CPlayer> CSquare::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die, vector<unique_ptr<CPlayer>>& playerList)
 {
 	return player;
 }

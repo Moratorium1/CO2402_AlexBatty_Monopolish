@@ -9,7 +9,7 @@ public:
 	COwnable(istream& file);
 	friend istream& operator >> (istream& inputStream, COwnable& square);
 
-	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die) override;
+	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die, vector<unique_ptr<CPlayer>>& playerList) override;
 
 protected:
 	int mRent = 0;

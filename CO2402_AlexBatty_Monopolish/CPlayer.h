@@ -6,11 +6,27 @@ using namespace std;
 
 class CBank;
 
+struct SPropertyDetails
+{
+	SPropertyDetails(int index, int cost, int colour)
+	{
+		mIndex	= index;
+		mCost	= cost;
+		mColour = colour;
+	}
+
+	int mIndex	= -1;
+	int mCost	= -1;
+	int mColour = -1;
+};
+
 class CPlayer
 {
 public:
 	CPlayer(istream& file, unique_ptr<CBank>& bank, const int index);
 	friend istream& operator >> (istream& inputStream, CPlayer& player);
+
+	~CPlayer();
 
 	/* The index of the SquareList Element that the player is currently on */
 	int mSquareIndex = 0;
@@ -19,7 +35,7 @@ public:
 	void MovePlayer(const int rolledValue);
 
 	/* A vector that holds the index of the players owned properties */
-	vector<int> ownedPropertyIndex;
+	vector<unique_ptr<SPropertyDetails>> ownedProperties;
 
 	string GetName();
 	int GetIndex();

@@ -9,6 +9,12 @@ CPlayer::CPlayer(istream& file, unique_ptr<CBank>& bank, const int index)
 	PayedByBank(mkStartingMoney, bank);
 }
 
+CPlayer::~CPlayer()
+{
+	ownedProperties.clear();
+	ownedProperties.shrink_to_fit();
+}
+
 istream& operator>>(istream& inputStream, CPlayer& player)
 {
 	inputStream >> player.mName;
