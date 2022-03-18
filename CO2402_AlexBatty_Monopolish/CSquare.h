@@ -19,6 +19,8 @@ enum class ESquareType : int
 };
 
 class CPlayer;
+class CBank;
+class CDie;
 
 class CSquare
 {
@@ -27,8 +29,13 @@ public:
 	friend istream& operator >> (istream& inputStream, CSquare& square);
 
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player);
+	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank);
+	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die);
 
 	int GetIndex();
+	void SetIndex(const int index);
+
+	void SetType(const ESquareType type);
 
 	string mName = "Invalid";
 

@@ -11,7 +11,7 @@ class CEvent :	public CSquare
 public:
 	CEvent(istream& file);
 
-	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player) override = 0;
+	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die) override;
 
 protected:
 	vector<int>	eventValue{ 20, 50, 100, 150, 200, 300 };

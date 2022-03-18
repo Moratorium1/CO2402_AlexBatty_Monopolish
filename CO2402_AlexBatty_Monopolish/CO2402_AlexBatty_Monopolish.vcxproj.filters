@@ -51,6 +51,21 @@
     <ClCompile Include="CPenalty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CJail.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CBank.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CStation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CFreeParking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CGoToJail.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMonopolish.h">
@@ -84,6 +99,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CPenalty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CJail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CBank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CStation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CFreeParking.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CGoToJail.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

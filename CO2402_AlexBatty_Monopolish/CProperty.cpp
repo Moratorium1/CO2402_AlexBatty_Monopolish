@@ -12,15 +12,19 @@ istream& operator>>(istream& inputStream, CProperty& property)
     return inputStream;
 }
 
-unique_ptr<CPlayer> CProperty::LandedOn(unique_ptr<CPlayer> player)
+unique_ptr<CPlayer> CProperty::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die)
 {
-    player = CSquare::LandedOn(move(player));
+    player = COwnable::LandedOn(move(player), bank, die);
 
-    if (mOwningPlayerName != player->GetName() && !mbIsMortgaged)
+    if (mOwningPlayerIndex != player->GetIndex() && !mbIsMortgaged)
     {
+        int rentDue = mRent;
         // Check if the owning player has all the properties of this colour - get owning player using a get player of name function
         
+
+        cout << player->GetName() << " pays \x9C" << rentDue << endl;
+        player->PayPlayer(rentDue, mOwningPlayerIndex, bank);
     }
 
-    return unique_ptr<CPlayer>();
+    return player;
 }

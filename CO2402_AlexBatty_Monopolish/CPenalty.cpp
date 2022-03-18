@@ -10,5 +10,10 @@ unique_ptr<CPlayer> CPenalty::LandedOn(unique_ptr<CPlayer> player)
 {
     player = CSquare::LandedOn(move(player));
 
-    return unique_ptr<CPlayer>();
+    return player;
+}
+
+unique_ptr<CPlayer> CPenalty::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank)
+{
+    return player;
 }

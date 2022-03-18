@@ -7,6 +7,7 @@
 #include "CMonopolish.h"
 #include "CPlayer.h"
 #include "CSquare.h"
+#include "CBank.h"
 #include "CDie.h"
 
 using namespace std;
@@ -14,7 +15,7 @@ using namespace std;
 int main()
 {
     {
-        auto Game = make_unique<CMonopolish>();
+        auto Game = make_unique<CMonopolish>(47);
     }
     _CrtDumpMemoryLeaks();
 }

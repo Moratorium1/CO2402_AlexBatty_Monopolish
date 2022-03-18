@@ -1,5 +1,6 @@
 #include "COwnable.h"
 #include "CPlayer.h"
+#include "CBank.h"
 
 COwnable::COwnable(istream& file)	: CSquare(file)
 {
@@ -14,19 +15,19 @@ istream& operator>>(istream& inputStream, COwnable& ownable)
     return inputStream;
 }
 
-unique_ptr<CPlayer> COwnable::LandedOn(unique_ptr<CPlayer> player)
+unique_ptr<CPlayer> COwnable::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die)
 {
     player = CSquare::LandedOn(move(player));
 
-    if (mOwningPlayerName == "Invalid")
+    if (mOwningPlayerIndex == -1)
     {
         cout << player->GetName() << " buys " << mName << " for \x9C" << mCost << endl;
         player->ownedPropertyIndex.push_back(mIndex);
-        mOwningPlayerName = player->GetName();
-        //player->PayBank(mCost);
+        mOwningPlayerIndex = player->GetIndex();
+        player->PayBank(mCost, bank);
     }
 
-    return unique_ptr<CPlayer>();
+    return player;
 }
 
 

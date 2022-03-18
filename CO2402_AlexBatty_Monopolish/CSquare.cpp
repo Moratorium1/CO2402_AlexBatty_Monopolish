@@ -18,7 +18,27 @@ unique_ptr<CPlayer> CSquare::LandedOn(unique_ptr<CPlayer> player)
 	return player;
 }
 
+unique_ptr<CPlayer> CSquare::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank)
+{
+	return player;
+}
+
+unique_ptr<CPlayer> CSquare::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die)
+{
+	return player;
+}
+
 int CSquare::GetIndex()
 {
 	return mIndex;
+}
+
+void CSquare::SetIndex(const int index)
+{
+	mIndex = index;
+}
+
+void CSquare::SetType(const ESquareType type)
+{
+	mType = type;
 }

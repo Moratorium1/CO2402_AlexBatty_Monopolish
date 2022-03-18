@@ -4,10 +4,12 @@
 #include <vector>
 using namespace std;
 
+class CBank;
+
 class CPlayer
 {
 public:
-	CPlayer(istream& file);
+	CPlayer(istream& file, unique_ptr<CBank>& bank, const int index);
 	friend istream& operator >> (istream& inputStream, CPlayer& player);
 
 	/* The index of the SquareList Element that the player is currently on */
@@ -20,15 +22,22 @@ public:
 	vector<int> ownedPropertyIndex;
 
 	string GetName();
+	int GetIndex();
+	int GetMoney();
 
-	
+	void PayBank(const int amount, unique_ptr<CBank>& bank);
+	void PayedByBank(const int amount, unique_ptr<CBank>& bank);
+	void ClaimAccruedRent(unique_ptr<CBank>& bank);
 
-
+	void PayPlayer(const int amount, const int otherPlayerIndex, unique_ptr<CBank>& bank);
 
 private:
+	int mIndex = -1;
+
 	string mName = "Invalid";
 
-	vector<unique_ptr<CPlayer>> playerVector;
+	int mMoney = 0;
 
+	const int mkStartingMoney = 1500;
 };
 

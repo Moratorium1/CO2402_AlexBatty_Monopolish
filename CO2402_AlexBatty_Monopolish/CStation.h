@@ -1,12 +1,15 @@
 #pragma once
 #include "COwnable.h"
-
-class CProperty :	public COwnable
+class CStation :	public COwnable
 {
 public:
-	CProperty(istream& file);
-	friend istream& operator >> (istream& inputStream, CProperty& property);
+	CStation(istream& file);
 
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die) override;
+
+protected:
+	const int mkCost = 200;
+
+	const int mkTicketCost = 10;
 };
 

@@ -139,10 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CBank.cpp" />
     <ClCompile Include="CBonus.cpp" />
     <ClCompile Include="CDie.cpp" />
     <ClCompile Include="CEvent.cpp" />
+    <ClCompile Include="CFreeParking.cpp" />
     <ClCompile Include="CGo.cpp" />
+    <ClCompile Include="CGoToJail.cpp" />
+    <ClCompile Include="CJail.cpp" />
     <ClCompile Include="CMonopolish.cpp" />
     <ClCompile Include="CO2402_AlexBatty_Monopolish.cpp" />
     <ClCompile Include="COwnable.cpp" />
@@ -150,19 +154,25 @@
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CProperty.cpp" />
     <ClCompile Include="CSquare.cpp" />
+    <ClCompile Include="CStation.cpp" />
     <ClCompile Include="SquareFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CBank.h" />
     <ClInclude Include="CBonus.h" />
     <ClInclude Include="CDie.h" />
     <ClInclude Include="CEvent.h" />
+    <ClInclude Include="CFreeParking.h" />
     <ClInclude Include="CGo.h" />
+    <ClInclude Include="CGoToJail.h" />
+    <ClInclude Include="CJail.h" />
     <ClInclude Include="CMonopolish.h" />
     <ClInclude Include="COwnable.h" />
     <ClInclude Include="CPenalty.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CProperty.h" />
     <ClInclude Include="CSquare.h" />
+    <ClInclude Include="CStation.h" />
     <ClInclude Include="SquareFactory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
