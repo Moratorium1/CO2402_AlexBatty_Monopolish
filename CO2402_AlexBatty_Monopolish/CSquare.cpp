@@ -12,6 +12,10 @@ istream& operator>>(istream& inputStream, CSquare& square)
 	return inputStream;
 }
 
+CSquare::~CSquare()
+{
+}
+
 unique_ptr<CPlayer> CSquare::LandedOn(unique_ptr<CPlayer> player)
 {
 	cout << player->GetName() << " landed on " << mName << endl;

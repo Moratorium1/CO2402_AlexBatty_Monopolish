@@ -28,6 +28,8 @@ public:
 	CSquare(istream& file);
 	friend istream& operator >> (istream& inputStream, CSquare& square);
 
+	virtual ~CSquare();
+
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player);
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank);
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die);

@@ -9,13 +9,12 @@ class CPlayer;
 class CBank;
 class CDie;
 
-
-
 class CMonopolish
 {
 public:
 	CMonopolish();
 	CMonopolish(const int seed);
+	~CMonopolish();
 
 	/* Calls PlayRound 20 times to play an enitre game */
 	void PlayGame();

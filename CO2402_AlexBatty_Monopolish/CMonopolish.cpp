@@ -62,6 +62,17 @@ CMonopolish::CMonopolish(const int seed)
 	PlayGame();
 }
 
+CMonopolish::~CMonopolish()
+{
+	playerVector.clear();
+	playerVector.shrink_to_fit();
+
+
+
+	squareVector.clear();
+	squareVector.shrink_to_fit();
+}
+
 CMonopolish::CMonopolish()
 {
 	mpBank = make_unique<CBank>();
