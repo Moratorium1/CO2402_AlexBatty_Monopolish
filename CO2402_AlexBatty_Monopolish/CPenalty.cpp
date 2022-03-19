@@ -17,16 +17,16 @@ CPenalty::CPenalty(istream& file) : CEvent(file)
     eventVector.push_back(make_unique<SEvent>("Pay some university fees. Gain \x9C", 300));
 }
 
-unique_ptr<CPlayer> CPenalty::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die)
+unique_ptr<CPlayer> CPenalty::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die, vector<unique_ptr<CPlayer>>& playerVector)
 {
-    player = CEvent::LandedOn(move(player), bank, die);
+    player = CEvent::LandedOn(move(player), bank, die, playerVector);
 
-    int rolledValue = die->RollValue() - 1;
-    int amount = eventVector[rolledValue]->mEventAmount;
+    int rolledValue = die->RollValue() ;
+    int amount = eventVector[rolledValue - 1]->mEventAmount;
 
     cout << player->GetName() << " rolls " << rolledValue << endl;
 
-    cout << eventVector[rolledValue]->mEventText << amount << endl;
+    cout << eventVector[rolledValue - 1]->mEventText << amount << endl;
 
     player->PayBank(amount, bank);
 

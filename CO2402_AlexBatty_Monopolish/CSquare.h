@@ -33,10 +33,12 @@ public:
 
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player);
 	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank);
-	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die, vector<unique_ptr<CPlayer>>& playerList);
+	virtual unique_ptr<CPlayer> LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die, vector<unique_ptr<CPlayer>>& playerVector);
 
 	int GetIndex();
 	void SetIndex(const int index);
+
+	int GetColour();
 
 	void SetType(const ESquareType type);
 

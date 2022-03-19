@@ -7,9 +7,9 @@ CStation::CStation(istream& file)	: COwnable(file)
 	mRent = mkTicketCost;
 }
 
-unique_ptr<CPlayer> CStation::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die)
+unique_ptr<CPlayer> CStation::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die, vector<unique_ptr<CPlayer>>& playerVector)
 {
-	player = COwnable::LandedOn(move(player), bank, die);
+	player = COwnable::LandedOn(move(player), bank, die, playerVector);
 
 	if (mOwningPlayerIndex != player->GetIndex())
 	{

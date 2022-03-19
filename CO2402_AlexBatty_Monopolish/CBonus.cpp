@@ -17,16 +17,16 @@ CBonus::~CBonus()
     CEvent::~CEvent();
 }
 
-unique_ptr<CPlayer> CBonus::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die)
+unique_ptr<CPlayer> CBonus::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die, vector<unique_ptr<CPlayer>>& playerVector)
 {
-    player = CEvent::LandedOn(move(player), bank, die);
+    player = CEvent::LandedOn(move(player), bank, die, playerVector);
 
-    int rolledValue = die->RollValue() - 1;
-    int amount = eventVector[rolledValue]->mEventAmount;
+    int rolledValue = die->RollValue();
+    int amount = eventVector[rolledValue - 1]->mEventAmount;
 
     cout << player->GetName() << " rolls " << rolledValue << endl;
 
-    cout << eventVector[rolledValue]->mEventText << amount << endl;
+    cout << eventVector[rolledValue - 1]->mEventText << amount << endl;
 
     player->PayedByBank(amount, bank);
 

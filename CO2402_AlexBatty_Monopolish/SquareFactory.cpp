@@ -1,4 +1,5 @@
 #include "SquareFactory.h"
+#include "CBank.h"
 #include "CGo.h"
 #include "CProperty.h"
 #include "CBonus.h"
@@ -9,7 +10,7 @@
 #include "CGoToJail.h"
 
 
-unique_ptr<CSquare> CreateNewSquare(ESquareType squareType, istream& file, int index)
+unique_ptr<CSquare> CreateNewSquare(ESquareType squareType, istream& file, int index, unique_ptr<CBank>& bank)
 {
 	unique_ptr<CSquare> squarePtr;
 
@@ -53,6 +54,13 @@ unique_ptr<CSquare> CreateNewSquare(ESquareType squareType, istream& file, int i
 	default:
 		squarePtr = make_unique<CSquare>(file);
 		break;
+	}
+
+	int squareColour = squarePtr->GetColour();
+
+	if (squareColour != -1)
+	{
+		bank->numberOfColourVector[squareColour]++;
 	}
 
 	squarePtr->SetType(squareType);

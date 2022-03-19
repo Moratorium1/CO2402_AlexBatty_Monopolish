@@ -3,4 +3,6 @@
 
 using namespace std;
 
-unique_ptr<CSquare> CreateNewSquare(ESquareType squareType, istream& file, int index);
+class CBank;
+
+unique_ptr<CSquare> CreateNewSquare(ESquareType squareType, istream& file, int index, unique_ptr<CBank>& bank);

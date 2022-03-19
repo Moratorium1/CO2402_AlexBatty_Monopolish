@@ -23,4 +23,4 @@
 1 Walker Street 320 45 6
 3 Bus Station
 1 Fylde Road 400 50 7
-1 Ring Way 420 50
+1 Ring Way 420 50 7

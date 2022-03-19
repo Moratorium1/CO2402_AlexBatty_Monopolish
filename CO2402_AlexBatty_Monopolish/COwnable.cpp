@@ -15,14 +15,14 @@ istream& operator>>(istream& inputStream, COwnable& ownable)
     return inputStream;
 }
 
-unique_ptr<CPlayer> COwnable::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die, vector<unique_ptr<CPlayer>>& playerList)
+unique_ptr<CPlayer> COwnable::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CBank>& bank, unique_ptr<CDie>& die, vector<unique_ptr<CPlayer>>& playerVector)
 {
     player = CSquare::LandedOn(move(player));
 
     if (mOwningPlayerIndex == -1)
     {
         cout << player->GetName() << " buys " << mName << " for \x9C" << mCost << endl;
-        player->ownedProperties.push_back(make_unique<SPropertyDetails>(mIndex, mCost, mColour));
+        player->ownedProperties.push_back(make_unique<SPropertyDetails>(mName, player->GetIndex(), mIndex, mCost, mColour));
         mOwningPlayerIndex = player->GetIndex();
         player->PayBank(mCost, bank);
     }

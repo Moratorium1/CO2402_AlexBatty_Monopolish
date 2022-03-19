@@ -40,7 +40,7 @@ void CMonopolish::SetupSquares()
 
 			if (type != 0)
 			{
-				squareVector.push_back(CreateNewSquare(ESquareType(type), file, index));
+				squareVector.push_back(CreateNewSquare(ESquareType(type), file, index, mpBank));
 				index++;
 			}
 		}
@@ -67,8 +67,6 @@ CMonopolish::~CMonopolish()
 	playerVector.clear();
 	playerVector.shrink_to_fit();
 
-
-
 	squareVector.clear();
 	squareVector.shrink_to_fit();
 }
@@ -93,6 +91,14 @@ void CMonopolish::PlayGame()
 		PlayRound();
 
 		// Check if all but one player is bankrupt
+		for (auto& player : playerVector)
+		{
+			if (player->GetMoney() < 0)
+			{
+				player->mbIsBankkrupt = true;
+				cout << player->GetName() << " is bankrupt" << endl;
+			}
+		}
 	}
 
 	EndGame();
@@ -102,29 +108,30 @@ void CMonopolish::PlayRound()
 {
 	for (auto& player : playerVector)
 	{
-		player->ClaimAccruedRent(mpBank);	// Get rent accured during other players turns
-
-		int rolledValue = mpDie->RollValue();										// Roll a value to move th player
-
-		cout << endl << player->GetName() << " rolled " << rolledValue << endl;		// Output value rolled
-
-		player->MovePlayer(rolledValue);											// Move player			
-
-		if (player->mSquareIndex > squareVector.size() - 1)							// Check if player has passed or landed on Go
+		if (!player->mbIsBankkrupt)
 		{
-			int size = squareVector.size();
+			player->ClaimAccruedRent(mpBank);	// Get rent accured during other players turns
 
-			player->MovePlayer(-size);												// Loop the player back to the start of the board
+			int rolledValue = mpDie->RollValue();										// Roll a value to move th player
 
-			cout << player->GetName() << " passes GO and collects \x9C" << mPassedGoAmount << endl;		// output that the player passed Go
-			player->PayedByBank(mPassedGoAmount, mpBank);							// Pay player for passing go
+			cout << endl << player->GetName() << " rolled " << rolledValue << endl;		// Output value rolled
+
+			player->MovePlayer(rolledValue);											// Move player			
+
+			if (player->mSquareIndex > squareVector.size() - 1)							// Check if player has passed or landed on Go
+			{
+				int size = squareVector.size();
+
+				player->MovePlayer(-size);												// Loop the player back to the start of the board
+
+				cout << player->GetName() << " passes GO and collects \x9C" << mPassedGoAmount << endl;		// output that the player passed Go
+				player->PayedByBank(mPassedGoAmount, mpBank);							// Pay player for passing go
+			}
+
+			player = squareVector[player->mSquareIndex]->LandedOn(move(player), mpBank, mpDie, playerVector);
+
+			player->EndTurn(mpBank);
 		}
-
-		player = squareVector[player->mSquareIndex]->LandedOn(move(player), mpBank, mpDie);
-
-		// Handle mortgaging and rebuying properties && output player money
-
-		cout << player->GetName() << " has \x9C" << player->GetMoney() << endl;
 	}
 	cout << endl;
 }
