@@ -11,6 +11,7 @@ unique_ptr<CPlayer> CStation::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CB
 {
 	player = COwnable::LandedOn(move(player), bank, die, playerVector);
 
+	// If the current player is not the owner
 	if (mOwningPlayerIndex != player->GetIndex())
 	{
 		cout << player->GetName() << " pays \x9C" << mRent << " for ticket" << endl;

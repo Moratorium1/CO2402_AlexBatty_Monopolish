@@ -21,14 +21,17 @@ unique_ptr<CPlayer> CPenalty::LandedOn(unique_ptr<CPlayer> player, unique_ptr<CB
 {
     player = CEvent::LandedOn(move(player), bank, die, playerVector);
 
+    // Roll a value
     int rolledValue = die->RollValue() ;
     int amount = eventVector[rolledValue - 1]->mEventAmount;
 
+    // out put the rolled value
     cout << player->GetName() << " rolls " << rolledValue << endl;
 
+    // out put the corrosponding event text and the amount
     cout << eventVector[rolledValue - 1]->mEventText << amount << endl;
 
-    player->PayBank(amount, bank);
+    player->PayBank(amount, bank);  // player pays bank the amount
 
     return player;
 }

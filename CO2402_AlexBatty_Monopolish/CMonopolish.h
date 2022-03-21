@@ -42,6 +42,7 @@ private:
 	/* A calls that holds the finite amount of money in the game */
 	unique_ptr<CBank> mpBank;
 
+	/* The amount given to the player for passing Go */
 	const int mPassedGoAmount = 200;
 };
 

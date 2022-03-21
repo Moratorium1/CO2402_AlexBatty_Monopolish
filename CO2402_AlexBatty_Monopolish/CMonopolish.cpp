@@ -5,17 +5,18 @@
 #include "CBank.h"
 #include "CDie.h"
 
+
 void CMonopolish::SetPlayers()
 {
-	ifstream playerFile("players.txt");
-	if (playerFile.is_open())
+	ifstream playerFile("players.txt");		// Open the text file
+	if (playerFile.is_open())				// If the file was successfully opened
 	{
-		int index = 0;
+		int index = 0;	// Holds the index of the vector that the player is being created in, passed to the player during creation
 
 		while (!playerFile.eof())
 		{
-			playerVector.push_back(make_unique<CPlayer>(playerFile, mpBank, index));
-			mpBank->amountForPlayer.push_back(0);
+			playerVector.push_back(make_unique<CPlayer>(playerFile, mpBank, index));	// Create the unique_ptr to the player
+			mpBank->amountForPlayer.push_back(0);										// Each player is to be assigned an element in the amount for player vector so that they can be paid rent
 			index++;
 		}
 	}
@@ -31,7 +32,7 @@ void CMonopolish::SetupSquares()
 	ifstream file("monopolish.txt");
 	if (file.is_open())
 	{
-		int index = 0;
+		int index = 0;	// The index of the element the square is being created in, passed to the square during creation
 
 		while (file)
 		{
@@ -40,7 +41,7 @@ void CMonopolish::SetupSquares()
 
 			if (type != 0)
 			{
-				squareVector.push_back(CreateNewSquare(ESquareType(type), file, index, mpBank));
+				squareVector.push_back(CreateNewSquare(ESquareType(type), file, index, mpBank));	// Create the square - bank is passed as bank holds the number of each colour
 				index++;
 			}
 		}
@@ -52,27 +53,9 @@ void CMonopolish::SetupSquares()
 	file.close();
 }
 
-CMonopolish::CMonopolish(const int seed)
-{
-	mpBank	= make_unique<CBank>();
-	mpDie	= make_unique<CDie>(seed);
-
-	SetPlayers();
-	SetupSquares();
-	PlayGame();
-}
-
-CMonopolish::~CMonopolish()
-{
-	playerVector.clear();
-	playerVector.shrink_to_fit();
-
-	squareVector.clear();
-	squareVector.shrink_to_fit();
-}
-
 CMonopolish::CMonopolish()
 {
+	// Make the Bank and Die
 	mpBank = make_unique<CBank>();
 	mpDie = make_unique<CDie>();
 
@@ -81,8 +64,31 @@ CMonopolish::CMonopolish()
 	PlayGame();
 }
 
+CMonopolish::CMonopolish(const int seed)
+{
+	// Make the Bank and Die passing a seed to the die
+	mpBank	= make_unique<CBank>();
+	mpDie	= make_unique<CDie>(seed);
+
+	SetPlayers();		// Populate the playerVector
+	SetupSquares();		// Populate the sqaureVector
+	PlayGame();			// Play 20 rounds
+}
+
+CMonopolish::~CMonopolish()
+{
+	// Delete all from the playerVector
+	playerVector.clear();
+	playerVector.shrink_to_fit();
+
+	// Delete all from the squareVector
+	squareVector.clear();
+	squareVector.shrink_to_fit();
+}
+
 void CMonopolish::PlayGame()
 {
+	//
 	for (int i = 1; i <= 20; i++)
 	{
 		cout << "Round " << i << endl;
@@ -90,14 +96,23 @@ void CMonopolish::PlayGame()
 
 		PlayRound();
 
-		// Check if all but one player is bankrupt
+		// Check if each player is bankrupt
+		int numOfBankruptPlayers = 0;
 		for (auto& player : playerVector)
 		{
-			if (player->GetMoney() < 0)
+			if (player->GetMoney() < 0)		// If a player is bankrupt at this stage they failed to mortgage to get above zero and are bankrupt
 			{
 				player->mbIsBankkrupt = true;
 				cout << player->GetName() << " is bankrupt" << endl;
+				numOfBankruptPlayers++;
 			}
+		}
+
+		// If the number of players bankrupt is one less than the total number of players than only one player reamains and the game should end
+		if (numOfBankruptPlayers == playerVector.size() - 1)
+		{
+			EndGame();
+			return;
 		}
 	}
 
@@ -125,12 +140,12 @@ void CMonopolish::PlayRound()
 				player->MovePlayer(-size);												// Loop the player back to the start of the board
 
 				cout << player->GetName() << " passes GO and collects \x9C" << mPassedGoAmount << endl;		// output that the player passed Go
-				player->PayedByBank(mPassedGoAmount, mpBank);							// Pay player for passing go
+				player->PayedByBank(mPassedGoAmount, mpBank);												// Pay player for passing go
 			}
 
-			player = squareVector[player->mSquareIndex]->LandedOn(move(player), mpBank, mpDie, playerVector);
+			player = squareVector[player->mSquareIndex]->LandedOn(move(player), mpBank, mpDie, playerVector);	// Call the LandedOn function of the square landed on
 
-			player->EndTurn(mpBank);
+			player->EndTurn(mpBank);	// End the players turn - handles mortgaging and rebuying properties
 		}
 	}
 	cout << endl;
@@ -146,6 +161,7 @@ void CMonopolish::EndGame()
 	cout << "GAME END " << endl;
 	cout << "=====================" << endl << endl;
 
+	//Get the player with the highest money value and declare them the winner
 	string winningPlayerName = "Invalid";
 	int mostMoney = -1;
 	for (auto& player : playerVector)
@@ -156,10 +172,10 @@ void CMonopolish::EndGame()
 			mostMoney = player->GetMoney();
 		}
 
-		cout << player->GetName() << " final money = \x9C" << player->GetMoney() << endl;
+		cout << player->GetName() << " has \x9C" << player->GetMoney() << endl;
 	}
 
-	cout << winningPlayerName << " Wins!" << endl;
+	cout << endl << winningPlayerName << " Wins!" << endl;
 }
 
 	

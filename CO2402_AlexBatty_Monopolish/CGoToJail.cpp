@@ -22,9 +22,9 @@ unique_ptr<CPlayer> CGoToJail::LandedOn(unique_ptr<CPlayer> player, unique_ptr<C
 	cout << player->GetName() << " goes to Jail" << endl;
 	cout << player->GetName() << " pays \x9C" << mCost << endl;
 
-	player->PayBank(mCost, bank);
+	player->PayBank(mCost, bank);	// Player pays the bank the cost
 
-	player->mSquareIndex = mJailIndex;
+	player->mSquareIndex = mJailIndex;	// Player squareIndex is set to the index of the jail square
 
 	return player;
 }

@@ -94,23 +94,23 @@ void CPlayer::PayPlayer(const int amount, const int otherPlayerIndex, unique_ptr
 
 void CPlayer::MortgageTilAboveZero(unique_ptr<CBank>& bank)
 {
-	if (ownedProperties.size() <= 0)
+	// Check if all the elements of the vector are empty if so set mIsBankrupt to true and stop the recursion of the function 
+	if (ownedProperties.empty())
 	{
 		mbIsBankkrupt = true;
 		return;
 	}
 
-	int index = 0;
-	int indexToCheapest = -1;
-	int cheapestCost = 0;
+	int index = 0;								// the number of times the for loop has looped - the index of the ownedProperties vector that the current property is in
+	int indexToCheapest = -1;					// the index the cheapest property is stored in
+	int cheapestCost = 0;						// the lowest cost of a property so far
 	string cheapestName = "Invalid";
 	for (auto& property : ownedProperties)
 	{
-		if (property)
+		if (property)	// Required as moving the pointer to the banks mortgagedPropertyVector leaves empty elements 
 		{
 			if ((property->mCost < cheapestCost || cheapestCost == 0) && property->mColour != -1)		// Checking for colour removes stations - Stations removed to match example output
 			{
-				// that is the index to the property on the squareList not the index of the property in the players ownedProperty Vector
 				indexToCheapest = index;
 				cheapestCost = property->mCost;
 				cheapestName = property->mName;
@@ -121,25 +121,26 @@ void CPlayer::MortgageTilAboveZero(unique_ptr<CBank>& bank)
 
 	cout << mName << " mortgages " << cheapestName << " for \x9C" << cheapestCost << endl;
 
-	PayedByBank(cheapestCost, bank);
-	bank->mortgagedPropertyVector.push_back(move(ownedProperties[indexToCheapest]));
-	mNumOfMortgagedProperties++;
+	PayedByBank(cheapestCost, bank);													// Player receives the cost of the property from the bank
+	bank->mortgagedPropertyVector.push_back(move(ownedProperties[indexToCheapest]));	// The unique_ptr is moved to the banks vector
+	mNumOfMortgagedProperties++;														// The variable the player has to track its total number of mortgaged properties is incremented
 	ownedProperties.shrink_to_fit();
 
-	if (mMoney <= 0)
+	if (mMoney <= 0)					// If the players money is still below zero call this function again
 		MortgageTilAboveZero(bank);
 }
 
 void CPlayer::RepayMortgage(unique_ptr<CBank>& bank)
 {
-	int index = 0;
-	int indexToCheapest = -1;
-	int cheapestCost = 0;
+	int index = 0;				// the index of the mortgagedPropertyVector that is being checked
+	int indexToCheapest = -1;	// stores the index of the mortgagedPropertyVector that has the property with the lowest cost
+	int cheapestCost = 0;		// The cost of the cheapest property found so far
 	string cheapestName = "Invalid";
 	for (auto& property : bank->mortgagedPropertyVector)
 	{
 		if (property)
 		{
+			// if the property is the cheapest and belongs to this player store it as the new cheapest
 			if ((property->mCost < cheapestCost || cheapestCost == 0) && property->mPlayerIndex == mIndex)
 			{
 				indexToCheapest = index;
@@ -150,13 +151,14 @@ void CPlayer::RepayMortgage(unique_ptr<CBank>& bank)
 		index++;
 	}
 
+	// If the player has more money than the cost of the cheapest property mortgaged that they own then buy it back
 	if (cheapestCost < mMoney)
 	{
 		cout << mName << " repays mortgage on " << cheapestName << " for \x9C" << cheapestCost << endl;
 
-		PayBank(cheapestCost, bank);
-		ownedProperties.push_back(move(bank->mortgagedPropertyVector[indexToCheapest]));
+		PayBank(cheapestCost, bank);														// Pay the bank the cost
+		ownedProperties.push_back(move(bank->mortgagedPropertyVector[indexToCheapest]));	// move the property back to the player's ownedProperty vector
 		bank->mortgagedPropertyVector.shrink_to_fit();
-		mNumOfMortgagedProperties--;
+		mNumOfMortgagedProperties--;														// Decrease the number of properties the player has mortgaged
 	}
 }

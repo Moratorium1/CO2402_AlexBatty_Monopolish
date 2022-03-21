@@ -19,7 +19,7 @@ unique_ptr<CPlayer> CProperty::LandedOn(unique_ptr<CPlayer> player, unique_ptr<C
 
     if (mOwningPlayerIndex != player->GetIndex())
     {
-        // Check if the index for the property appears in the banks mortgaged property vector 
+        // Check if the index for the property appears in the banks mortgaged property vector - if so the property is mortgaged and no rent is to be paid
         bool bIsMortgaged = false;
         for (auto& property : bank->mortgagedPropertyVector)
         {

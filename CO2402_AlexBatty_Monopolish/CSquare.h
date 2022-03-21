@@ -42,9 +42,9 @@ public:
 
 	void SetType(const ESquareType type);
 
+protected:
 	string mName = "Invalid";
 
-protected:
 	/* The index of the vector to get this square */
 	int mIndex = -1;
 
